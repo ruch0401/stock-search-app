@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p class="pt-4 pb-4 large-font">My Watchlist</p>
+      <p class="text-center" #warning>
+        <ngb-alert *ngIf="isWatchlistEmpty" [dismissible]="false">
+          Currently you don't have any stock in your watchlist.
+        </ngb-alert>
+      </p>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <div *ngFor="let watchlistItem of watchlistArr">
+        <div id="card-{{watchlistItem.ticker}}" class="card card-hover-shadow mb-2" #closeablecard>
+          <div class="card-header bg-transparent border-bottom-0  p-0 pr-1">
+            <button data-target="#closeablecard" type="button" class="close" aria-label="Close">
+              <span (click)="removeFromWatchlist(watchlistItem)" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="card-body mt-n3 p-3" (click)="viewCard(watchlistItem.ticker)">
+            <div class="row h4">
+              <div class="col-6">
+                <p class="card-text">{{watchlistItem.ticker}}</p>
+              </div>
+              <div class="col-6">
+                <p class="card-text float-right"
+                   [ngClass]="watchlistItem.changeInPrice > 0 ? 'text-success' : 'text-danger'">{{watchlistItem.currentPrice}}</p>
+              </div>
+            </div>
+            <div class="row h6">
+              <div class="col-6">
+                <p class="card-text">{{watchlistItem.tickerName}}</p>
+              </div>
+              <div class="col-6">
+                <p class="card-text float-right"
+                   [ngClass]="watchlistItem.changeInPrice > 0 ? 'text-success' : 'text-danger'"><i
+                  [ngClass]="watchlistItem.changeInPrice > 0 ? 'bi bi-caret-up-fill' : 'bi bi-caret-down-fill'"
+                  class=""></i>{{watchlistItem.changeInPrice }} ({{
+                  watchlistItem.percentageChangeInPrice | number:'.1-2'
+                  }}%)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

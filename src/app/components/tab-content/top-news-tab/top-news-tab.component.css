@@ -1,0 +1,35 @@
+.card {
+  cursor: pointer;
+}
+
+::ng-deep ngb-modal-backdrop {
+  z-index: 1050 !important;
+}
+
+.btn-twitter {
+  color: #55acee;
+  outline: none;
+  box-shadow: none;
+   background-color: #55acee;
+   border-color: rgba(0,0,0,0.2);
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+div.modal-body h2 {
+  line-height: 25px;
+}
+
+div.modal-header button {
+  outline: none;
+}
+
+@media screen and (min-width: 800px) {
+  .my-custom-image-size {
+    width: 125px;
+    height: 100px;
+  }
+}

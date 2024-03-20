@@ -1,0 +1,25 @@
+<div class="container">
+  <mat-tab-group mat-stretch-tabs dynamicHeight>
+    <mat-tab label="Summary">
+      <app-summary-tab [companyDetailsFromTabs]="companyDataFromTabs"
+                       [latestStockPriceFromTabs]="latestStockPriceFromTabs" [peersFromTab]="peersFromTab"
+                       [hourlyDataFromTabs]="hourlyDataFromTabs"></app-summary-tab>
+    </mat-tab>
+    <mat-tab label="Top News">
+      <app-top-news-tab [companyNewsFromTab]="companyNewsFromTabs"></app-top-news-tab>
+    </mat-tab>
+    <mat-tab label="Charts">
+      <ng-template matTabContent>
+        <app-charts [companyDetailsFromTabs]="companyDataFromTabs"
+                    [historicalDataFromTabs]="historicalDataFromTabs"></app-charts>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Insights">
+      <ng-template matTabContent>
+        <app-insights [companyDetailsFromTabs]="companyDataFromTabs" [socialSentimentFromTabs]="socialSentimentFromTabs"
+                      [recommendationDataFromTabs]="recommendationDataFromTabs"
+                      [epsFromTabs]="epsFromTabs"></app-insights>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

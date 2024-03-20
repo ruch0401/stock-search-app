@@ -1,0 +1,8 @@
+runtime: nodejs16
+
+# handlers:
+# - url: /
+#   static_files: dist/hw8/index.html
+#   upload: dist/hw8/*
+#   static_dir: dist/hw8
+  

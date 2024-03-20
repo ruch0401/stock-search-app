@@ -1,0 +1,46 @@
+<div class="container">
+    <p class="text-center h5 mt-3">Social Sentiments</p>
+    <div class="row justify-content-center">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <table class="table text-center table-responsive">
+                <table class="table test-class">
+                    <thead>
+                        <tr>
+                            <th class="table-active" scope="col">{{companyDetails.name}}</th>
+                            <th class="table-active" scope="col">Reddit</th>
+                            <th class="table-active" scope="col">Twitter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-active">Total Mentions</td>
+                            <td>{{socialSentiment.redditMentions}}</td>
+                            <td>{{socialSentiment.twitterMentions}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-active">Positive Mentions</td>
+                            <td>{{socialSentiment.redditPositiveMentions}}</td>
+                            <td>{{socialSentiment.twitterPositiveMentions}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-active">Negative Mentions</td>
+                            <td>{{socialSentiment.redditNegativeMentions}}</td>
+                            <td>{{socialSentiment.twitterNegativeMentions}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </table>
+        </div>
+        <div class="col-lg-3"></div>
+
+    </div>
+    <div class="row mb-3">
+        <div class="col-lg-6 col-sm-12">
+          <app-recommendation-chart [recommendationDataFromTabs]="recommendationData"></app-recommendation-chart>
+        </div>
+        <div class=" col-lg-6 col-sm-12">
+          <app-eps-chart [epsFromTabs]="epsData"></app-eps-chart>
+        </div>
+    </div>
+</div>

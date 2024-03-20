@@ -1,0 +1,17 @@
+.footer-container {
+  position: relative;
+  background: #dddddd;
+  height: 2.5rem;
+  text-align: center;
+}
+
+footer {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* .footer {
+  background: #dddddd;
+} */

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row mt-2 mb-2">
+        <div class="col-lg-6 col-sm-12 p-2" *ngFor="let item of companyNewsFromTab;">
+            <div class="card" #newscard (click)="open(modalNews, item)">
+                <div class="row card-body">
+                    <div class="col-lg-4 col-sm-12">
+                        <img class="card-img-top my-custom-image-size" src="{{item.image}}" alt="News Card" >
+                    </div>
+                    <div class="col-lg-8 col-sm-12 align-middle">
+                        <p>{{item.headline}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalNews let-modal>
+    <div class="modal-header">
+        <div class="row">
+            <h1 id="custom-source" class="modal-title"></h1>
+            <p id="custom-published-date" class="text-muted"></p>
+        </div>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body p-4">
+        <div class="row">
+            <p id="custom-title" class="h5"></p>
+            <p id="custom-description"></p>
+            <p id="custom-url" class="text-muted"></p>
+
+            <div class="col border border-secondary rounded p-5">
+                <p>Share</p>
+                <span id="twitter-share-button"></span>
+                <span id="facebook-share-button"></span>
+            </div>
+        </div>
+
+    </div>
+</ng-template>

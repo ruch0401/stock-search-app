@@ -1,0 +1,40 @@
+<form id="autocomplete-form" class="mb-3" (ngSubmit)="submit()">
+  <div class="form-group text-center">
+    <label class="mb-4 pt-4 h2">STOCK SEARCH</label>
+    <div class="col-sm-3 col-sm-offset-3 mx-auto">
+      <div class="input-group input-group-sm blue-border">
+        <input class="form-control form-control-sm ml-3 p-0 mt-0 mb-0 borderless-input"
+               id="query" type="text" placeholder="Enter stock ticker symbol" matInput
+               value="{{tickerSearched}}"
+               [formControl]="formControl" [matAutocomplete]="auto" required>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)='submit()'>
+          <mat-option *ngIf="isLoading">
+            <mat-spinner diameter="25"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let tag of autocompleteTags" [value]="tag.symbol">
+              <span>{{tag.symbol}}</span><small> | {{tag.description}}</small>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+        <div class="input-group-append">
+          <button class="btn" type="submit" (click)="submit()"><i class="bi bi-search"></i></button>
+        </div>
+        <div class="input-group-append">
+          <button class="btn" type="reset" (click)="resetInput()"><i class="bi bi-x"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="container">
+  <div class="row" #alert1>
+    <p class="text-center">
+      <ngb-alert *ngIf="!isTickerEntered" [(ngModel)]="isTickerEntered" [dismissible]="true" type="danger" ngDefaultControl>
+        Please enter a valid ticker.
+      </ngb-alert>
+    </p>
+  </div>
+</div>
+

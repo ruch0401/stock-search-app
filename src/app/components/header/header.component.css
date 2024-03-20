@@ -1,0 +1,23 @@
+nav {
+  background: #2323ac;
+}
+
+.active {
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.nav-item {
+  text-align: right;
+}
+
+.navbar-brand {
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse {
+    height: auto !important;
+    padding-left: 0 !important;
+  }
+}

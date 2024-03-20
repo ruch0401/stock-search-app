@@ -1,0 +1,14 @@
+Steps to build the codebase -
+
+Run the following command -
+- npm install
+- npm run build
+
+
+npm install : to download node modules and packages
+npm run build : to build the project
+
+The application will run on port 3000 locally.
+http://localhost:3000/
+
+This will navigate you to /search/home route internally.

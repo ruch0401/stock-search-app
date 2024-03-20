@@ -1,0 +1,8 @@
+.background-image-container {
+  margin: 0;
+  min-height: calc(100vh - 6rem);
+  background: linear-gradient(rgba(239, 239, 239, 0.7), rgba(239, 239, 239, 1)),
+    url("resources/background-graph.jpg") no-repeat fixed;
+  background-size: cover;
+  padding-top: 75px;
+}

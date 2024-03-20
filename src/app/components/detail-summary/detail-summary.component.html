@@ -1,0 +1,133 @@
+<app-search-box [tickerSearched]="companyDetails.ticker"></app-search-box>
+
+<mat-progress-spinner class="mx-auto" mode="indeterminate" diameter="55" style="color: #2323ac"
+                      *ngIf="showDetails && (loaderService?.isLoading | async) && !isError" [(ngModel)]="isError"
+                      ngDefaultControl>
+</mat-progress-spinner>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      <ngb-alert *ngIf="isError" [dismissible]="false" type="danger" [(ngModel)]="isError" ngDefaultControl>
+        {{(errorMessage) ? errorMessage : defaultErrorMessage}}
+      </ngb-alert>
+    </p>
+  </div>
+</div>
+
+<div class="container mt-1" *ngIf="showDetails && !(loaderService?.isLoading | async) && !isError">
+  <div class="row">
+    <div class="col-12">
+      <div #alertcolwatchlist class="row" style="display: none;" (click)="removeAlertFromDom()">
+        <app-alert *ngIf="isWatchlisted" [alert]="watchlistedAlert"></app-alert>
+        <app-alert *ngIf="!isWatchlisted" [alert]="watchlistedAlert"></app-alert>
+      </div>
+      <div #alertcolportfolio class="row" style="display: none;" (click)="removeAlertFromDom()">
+        <app-alert *ngIf="isPortfolioed" [alert]="portfolioAlert"></app-alert>
+        <app-alert *ngIf="!isPortfolioed" [alert]="portfolioAlert"></app-alert>
+      </div>
+      <div class="row">
+        <div class="col-5">
+          <div class="row" (click)="watchlistStock(companyDetails?.ticker)">
+            <div class="h4 watchlist large-font">{{ companyDetails?.ticker }}&nbsp;
+              <i class="bi bi-star" *ngIf="!isWatchlisted"></i>
+              <i class="bi bi-star-fill" *ngIf="isWatchlisted" style="color: gold;"></i>
+            </div>
+          </div>
+          <div class="h5 text-muted small-font">{{ companyDetails?.name }}</div>
+          <div class="h6 text-muted extra-small-font">{{ companyDetails?.exchange }}</div>
+          <button class="btn btn-success"
+                  (click)="open(customModal, companyDetails.ticker, latestStockPrice.c, true)">Buy
+          </button>
+          <span>&nbsp;&nbsp;</span>
+          <button *ngIf="isPortfolioed" [(ngModel)]="isPortfolioed" class="btn btn-danger"
+                  (click)="open(customModal, companyDetails.ticker, latestStockPrice.c, false)"
+                  ngDefaultControl>Sell
+          </button>
+        </div>
+        <div class="col-2 p-0 text-center">
+          <img src="{{ companyDetails?.logo }}" alt="" class="img-fluid" height="100" width="100">
+        </div>
+        <div class="col-5 text-right">
+          <div class="h4 large-font">
+            <p
+              [ngClass]="latestStockPrice.d > 0 ? 'text-success' : 'text-danger'">{{ latestStockPrice?.c | number:'.2-2' }}</p>
+          </div>
+          <div class="h5 text-muted small-font">
+            <p [ngClass]="latestStockPrice.d > 0 ? 'text-success' : 'text-danger'">
+              <i [ngClass]="latestStockPrice.d > 0 ? 'bi bi-caret-up-fill' : 'bi bi-caret-down-fill'" class=""></i>
+              {{latestStockPrice.d | number:'.2-2' }}
+              ({{latestStockPrice.dp | number:'.2-2'}}%)
+            </p>
+          </div>
+          <div class="h6 text-muted extra-small-font">{{ currentTime | date:'yyyy-MM-dd HH:mm:ss' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="h6 text-center mt-3 text-success" *ngIf="isMarketOpen; else marketIsClosed">
+        Market is Open
+      </p>
+      <ng-template #marketIsClosed>
+        <p class="h6 text-center mt-3 text-danger">Market Closed on {{
+          convertTimestampToDate(latestStockPrice.t) }}</p>
+      </ng-template>
+    </div>
+  </div>
+  <app-tabs *ngIf="showDetails" [companyDetails]="companyDetails" [latestStockPrice]="latestStockPrice"
+            [peers]="peers" [companyNews]="companyNews" [socialSentiment]="socialSentiment"
+            [historicalData]="historicalData" [hourlyData]="hourlyData" [recommendationData]="recommendationData"
+            [eps]="eps">
+    <pre>{{peers | json}}</pre>
+  </app-tabs>
+</div>
+
+<ng-template #customModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="custom-ticker"></h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div id="custom-current-price" class="col d-flex ml-3">
+      </div>
+    </div>
+    <div class="row">
+      <div id="custom-money-in-wallet" class="col d-flex ml-3"></div>
+    </div>
+    <div class="row">
+      <div class="col d-flex ml-3">
+        <p>Quantity: &nbsp;</p>
+        <input [(ngModel)]="stockQuantity" type="number" name="quantity"  min="0" id="custom-quantity" value="0">
+      </div>
+    </div>
+    <div class="row ml-2" *ngIf="walletBalance - stockQuantity * currentPrice < 0 && isBuying">
+      <p class="text-danger">
+        Not enough money in the wallet
+      </p>
+    </div>
+    <div class="row ml-2" *ngIf="stockQuantity > getStockQuantityForTicker(this) && !isBuying">
+      <p class="text-danger">
+        You cannot sell the stocks that you don't have!
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div id="custom-total" class="col d-flex">
+      <p>Total : {{ (stockQuantity * currentPrice) | number:'1.2-2' }}</p>
+    </div>
+    <button type="button" class="btn btn-success" *ngIf="isBuying"
+            [ngClass]="(walletBalance - stockQuantity * currentPrice > 0 && stockQuantity > 0) ? '' : 'disabled'"
+            (click)="addToPortfolio(this)">Buy
+    </button>
+    <button type="button" class="btn btn-success" *ngIf="!isBuying"
+            [ngClass]="(stockQuantity <= getStockQuantityForTicker(this) && stockQuantity > 0) ? '' : 'disabled'"
+            (click)="removeFromPortfolio(this)">Sell
+    </button>
+  </div>
+</ng-template>

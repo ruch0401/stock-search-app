@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row pt-5 pb-5 small-small-font">
+    <div class="col-lg-6 col-sm-12">
+      <div class="row test-class custom-summary-padding">
+        <p><strong>High Price: </strong>{{ latestStockPrice?.h | number:'1.2-2'}}</p>
+        <p><strong>Low Price: </strong>{{ latestStockPrice?.l | number:'1.2-2'}}</p>
+        <p><strong>Open Price: </strong>{{ latestStockPrice?.o | number:'1.2-2'}}</p>
+        <p><strong>Prev. Price: </strong>{{ latestStockPrice?.pc | number:'1.2-2'}}</p>
+      </div>
+      <div class="row">
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="h5 text-center pt-5"><u>About the company</u></p>
+          </div>
+        </div>
+        <div class="row">
+          <p><strong>IPO Start Date: </strong>{{companyDetails?.ipo}}</p>
+          <p><strong>Industry: </strong>{{companyDetails?.finnhubIndustry}}</p>
+          <p><strong>Webpage: </strong><a href="{{companyDetails?.weburl}}"
+                                          target="_blank">{{companyDetails?.weburl}}</a></p>
+          <p><strong>Company Peers: </strong></p>
+          <div class="w-100"></div>
+          <div class="d-flex flex-wrap pb-3">
+            <div (click)="updateLatestSearchedTicker(peer)" *ngFor="let peer of peersFromTab">
+              <a routerLink="/search/{{peer}}">{{peer}},&nbsp;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-12">
+      <div class="row">
+        <highcharts-chart [Highcharts]="highcharts" [options]="highchartOptions" style="display: block;">
+        </highcharts-chart>
+      </div>
+    </div>
+  </div>
+</div>

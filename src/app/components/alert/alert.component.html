@@ -1,0 +1,13 @@
+<div class="container" *ngIf="showAlert" [(ngModel)]="showAlert" ngDefaultControl>
+  <div #alertRef class="row">
+    <div class="col">
+      <ngb-alert
+        class="text-center"
+        [type]="alertTemp.type"
+        [dismissible]="alertTemp.dismissible"
+        (closed)="customClose()">
+        {{alertTemp.message}}
+      </ngb-alert>
+    </div>
+  </div>
+</div>

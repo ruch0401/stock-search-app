@@ -1,0 +1,41 @@
+.watchlist {
+  cursor: pointer;
+}
+
+/*For mobile version*/
+@media only screen and (max-width: 600px) {
+  .extra-small-font {
+    font-size: 12px;
+  }
+  .small-font {
+    font-size: 16px;
+  }
+  .medium-font {
+    font-size: 25px;
+  }
+  .large-font {
+    font-size: 30px;
+  }
+  #custom-quantity {
+    width: 20%;
+  }
+}
+
+/*For desktop version*/
+@media only screen and (min-width: 600px) {
+  .extra-small-font {
+    font-size: 20px;
+  }
+  .small-font {
+    font-size: 25px;
+  }
+  .medium-font {
+    font-size: 30px;
+  }
+  .large-font {
+    font-size: 35px;
+  }
+  #custom-quantity {
+    width: 20%;
+  }
+}
