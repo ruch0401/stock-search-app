@@ -15,7 +15,7 @@ Try the app yourself here - https://stock-search-angular.herokuapp.com/
 ## Technologies Used
 
 | Area     | Technologies         |
-| -------- | -------------------- |
+|----------|----------------------|
 | Backend  | Node.js + Express.js |
 | Frontend | Angular              |
 
@@ -29,7 +29,7 @@ Click [here](resources/hw8-grading.pdf) for HW8 grading guidelines
 ### Library Details
 
 | Libraries Used | Purpose                                         |
-| -------------- | ----------------------------------------------- |
+|----------------|-------------------------------------------------|
 | `axios`        | For making API calls to the Finnhub API         |
 | `cors`         | To handle cross-origin-resource-sharing issues  |
 | `nodemon`      | For hot reloading of the node server            |
@@ -41,7 +41,7 @@ Host URL1: https://jdofgbmx.uw.r.appspot.com
 Host URL2: https://stock-search-angular.herokuapp.com/
 
 | Purpose                       | Endpoint                       | Query Params                 | Example                                                                                                                   |
-| ----------------------------- | ------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------|--------------------------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | Company Description           | /company/description           | symbol                       | https://stock-search-angular.herokuapp.com/company/description?symbol=AAPL                                                |
 | Company Historical Data       | /company/historical/data       | symbol, resolution, from, to | https://stock-search-angular.herokuapp.com/company/historical/data?symbol=AAPL&resolution=D&from=1631022248&to=1631627048 |
 | Company Latest Stock Price    | /company/latest-stock-price    | symbol                       | https://stock-search-angular.herokuapp.com/company/latest-stock-price?symbol=AAPL                                         |

@@ -1,5 +1,5 @@
 {
-  "name": "hw8",
+  "name": "stock-search-app",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
